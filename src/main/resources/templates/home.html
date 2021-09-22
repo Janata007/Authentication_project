@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Spring Security Example</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+            font-family: "Lato", sans-serif;
+        }
+
+
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            min-height: 100vh;
+        }
+
+
+        .formLabel{
+            font-size: 2.6rem;
+            font-weight: bold;
+            text-transform: capitalize;
+            position: relative;
+            color: darkslategray;
+        }
+
+        .formLabel::after{
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            height: 3px;
+            width: 0%;
+            background-color: darkolivegreen;
+            transition: all 0.25s ease-in-out;
+
+            transform-origin: center;
+        }
+
+        .formInput{
+            font-size: 1.8rem;
+            padding: 5px;
+            width: 70%;
+        }
+
+
+        .formInput:focus ~ .formLabel::after{
+            width: 100%;
+        }
+
+
+        .formButtonContainer{
+            width: 100%;
+        }
+
+        .formButton{
+            width: 100%;
+            font-size: 1.6rem;
+            padding: 5px;
+
+            text-transform: capitalize;
+
+            background-color: transparent;
+            border: solid 2px #333533;
+            border-radius: 5px;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .formButton:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+            background-color: darkolivegreen;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .pageContainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            width: 40%;
+            text-align: center;
+        }
+
+        .homeTitle{
+            font-size: 3rem;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .pageContainer p{
+            font-size: 2rem;
+            width: 100%;
+        }
+
+        .pageContainer > p{
+            margin-bottom: 15px;
+        }
+
+        .linkContainer{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            width: 100%;
+        }
+
+        .linkContainer p{
+            width: 100%;
+        }
+
+        a{
+            width: 45%;
+            font-size: 1.8rem;
+            padding: 5px;
+
+            text-transform: capitalize;
+
+            background-color: transparent;
+            border: solid 2px #333533;
+            border-radius: 5px;
+            transition: all 0.25s ease-in-out;
+        }
+
+        a:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+            background-color: darkolivegreen;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+    </style>
+</head>
+<body>
+<div class="pageContainer">
+    <h1 class="homeTitle">Welcome!</h1>
+    <p>Are you a student or a professor?</p>
+    <div class="linkContainer">
+        <a th:href="@{/hello}">Student</a>
+        <a th:href="@{/profesor/studenti}">Professor</a>
+    </div>
+</div>
+</body>
+</html>

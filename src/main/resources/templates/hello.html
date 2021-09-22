@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>Student page</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+    *{
+      margin: 0px;
+      padding: 0px;
+      box-sizing: border-box;
+
+      font-family: "Lato", sans-serif;
+    }
+
+
+
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      height: 100vh;
+      min-height: 100vh;
+    }
+
+
+    .formLabel{
+      font-size: 2.6rem;
+      font-weight: bold;
+      text-transform: capitalize;
+      position: relative;
+      color: darkslategray;
+    }
+
+    .formLabel::after{
+      content: '';
+      display: block;
+      position: absolute;
+      bottom: 0;
+      left: 0;
+
+      height: 3px;
+      width: 0%;
+      background-color: darkolivegreen;
+      transition: all 0.25s ease-in-out;
+
+      transform-origin: center;
+    }
+
+    .formInput{
+      font-size: 1.8rem;
+      padding: 5px;
+      width: 70%;
+    }
+
+
+    .formInput:focus ~ .formLabel::after{
+      width: 100%;
+    }
+
+
+    .formButtonContainer{
+      width: 100%;
+    }
+
+    .formButton{
+      width: 100%;
+      font-size: 1.6rem;
+      padding: 5px;
+
+      text-transform: capitalize;
+
+      background-color: transparent;
+      border: solid 2px #333533;
+      border-radius: 5px;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .formButton:hover{
+      transform: scale(1.1);
+      cursor: pointer;
+      background-color: darkolivegreen;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+    .pageContainer{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+
+      width: 40%;
+    }
+
+    .helloTitle{
+      text-transform: uppercase;
+      font-size: 2rem;
+      margin-bottom: 30px;
+
+      width: 100%;
+      text-align: center;
+    }
+
+    .userName{
+      color: darkslategray;
+    }
+
+    .buttonContainer{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      width: 100%;
+    }
+
+    .buttonContainer form{
+      width: 45%;
+    }
+
+    .buttonContainer input{
+      width: 100%;
+      font-size: 1.6rem;
+      padding: 5px;
+
+      text-transform: capitalize;
+
+      background-color: transparent;
+      border: solid 2px #333533;
+      border-radius: 5px;
+      transition: all 0.25s ease-in-out;
+    }
+
+    .buttonContainer input:hover{
+      transform: scale(1.1);
+      cursor: pointer;
+      background-color: darkolivegreen;
+      color: white;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+<div class="pageContainer">
+  <h1 class="helloTitle" th:inline="text">Hello <span class="userName">[[${#httpServletRequest.remoteUser}]]!</span></h1>
+  <div class="buttonContainer">
+    <form th:action="@{/logout}" method="post">
+      <input type="submit" value="Sign Out"/>
+    </form>
+    <form th:action="@{/student/oceni}" method="get">
+      <input type="submit" value="Check Grades"/>
+    </form>
+  </div>
+</div>
+</body>
+</html>

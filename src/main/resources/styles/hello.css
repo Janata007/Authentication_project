@@ -1,0 +1,55 @@
+.pageContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    width: 40%;
+}
+
+.helloTitle{
+    text-transform: uppercase;
+    font-size: 2rem;
+    margin-bottom: 30px;
+
+    width: 100%;
+    text-align: center;
+}
+
+.userName{
+    color: darkslategray;
+}
+
+.buttonContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    width: 100%;
+}
+
+.buttonContainer form{
+    width: 45%;
+}
+
+.buttonContainer input{
+    width: 100%;
+    font-size: 1.6rem;
+    padding: 5px;
+
+    text-transform: capitalize;
+
+    background-color: transparent;
+    border: solid 2px #333533;
+    border-radius: 5px;
+    transition: all 0.25s ease-in-out;
+}
+
+.buttonContainer input:hover{
+    transform: scale(1.1);
+    cursor: pointer;
+    background-color: darkolivegreen;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 2px;
+}

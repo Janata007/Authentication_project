@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Oceni</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../styles/showAllStudents.css">
+    <style>
+
+        @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+
+        *{
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+            font-family: "Lato", sans-serif;
+        }
+
+
+
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            height: 100vh;
+            min-height: 100vh;
+        }
+
+
+        .formLabel{
+            font-size: 2.6rem;
+            font-weight: bold;
+            text-transform: capitalize;
+            position: relative;
+            color: darkslategray;
+        }
+
+        .formLabel::after{
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            height: 3px;
+            width: 0%;
+            background-color: darkolivegreen;
+            transition: all 0.25s ease-in-out;
+
+            transform-origin: center;
+        }
+
+        .formInput{
+            font-size: 1.8rem;
+            padding: 5px;
+            width: 70%;
+        }
+
+
+        .formInput:focus ~ .formLabel::after{
+            width: 100%;
+        }
+
+
+        .formButtonContainer{
+            width: 100%;
+        }
+
+        .formButton{
+            width: 100%;
+            font-size: 1.6rem;
+            padding: 5px;
+
+            text-transform: capitalize;
+
+            background-color: transparent;
+            border: solid 2px #333533;
+            border-radius: 5px;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .formButton:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+            background-color: darkolivegreen;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        .pageContainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            width: 100%;
+        }
+
+        .tableContainer{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            width: 80%;
+        }
+
+        .showAllStudentsTitle{
+            text-transform: uppercase;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .studentTable{
+            padding: 15px;
+            border-radius: 10px;
+            border: solid 2px black;
+
+            border-collapse: collapse;
+
+            width: 100%;
+            height: 80%;
+            overflow-y: scroll;
+            scrollbar-color: darkolivegreen darkslategray;
+            margin-bottom: 15px;
+        }
+
+        td, th{
+            border:  1px solid black;
+            padding: 5px;
+            min-width: 100px;
+            background: white;
+            text-align: center;
+        }
+
+        th{
+            margin-top: 5px;
+            font-size: 1.4rem;
+            text-transform: capitalize;
+            background-color: darkslategray;
+            color: white;
+        }
+
+        td{
+            font-size: 1.2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 5px;
+            text-align: center;
+        }
+
+        .buttonCell{
+            width: 15%;
+            padding: 10px;
+        }
+
+        td form{
+            width: 100%;
+        }
+
+        .tableButton{
+            width: 100%;
+            font-size: 1.2rem;
+            padding: 5px;
+
+            text-transform: capitalize;
+
+            background-color: transparent;
+            border: solid 2px #333533;
+            border-radius: 5px;
+            transition: all 0.1s ease-in-out;
+        }
+
+        .tableButton:hover{
+            cursor: pointer;
+            background-color: darkolivegreen;
+            color: white;
+        }
+
+        form{
+            width: 80%;
+        }
+
+        .homeButton{
+            width: 100%;
+            font-size: 1.4rem;
+            padding: 5px;
+
+            text-transform: capitalize;
+
+            background-color: transparent;
+            border: solid 2px #333533;
+            border-radius: 5px;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .homeButton:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+            background-color: darkolivegreen;
+            color: white;
+        }
+
+    </style>
+</head>
+<body>
+<div class="pageContainer">
+    <h2 class="showAllStudentsTitle">My Grade List</h2>
+    <div class="tableContainer" th:if="${not #lists.isEmpty(oceni)}">
+        <table class="studentTable">
+            <tr>
+                <th>Id</th>
+                <th>Grade</th>
+                <th>Subject</th>
+            </tr>
+            <tr th:each="oceni : ${oceni}">
+
+                <td th:text="${oceni.id}"></td>
+                <td th:text="${oceni.ocenka}"></td>
+                <td th:text="${oceni.predmet}"></td>
+
+            </tr>
+
+        </table>
+    </div>
+    <form th:action="@{/hello}" method="get">
+        <input class="homeButton" type="submit" value="Go to Home"/>
+    </form>
+</div>
+</body>
+</html>
