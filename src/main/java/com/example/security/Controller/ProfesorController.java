@@ -6,6 +6,7 @@ import com.example.security.Models.Student;
 import com.example.security.Service.Interface.IOceniService;
 import com.example.security.Service.Interface.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +23,7 @@ public class ProfesorController {
     @Autowired
     private IOceniService oceniService;
 
-
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti")
     public String findStudent(Model model) {
         List<Student> studenti = profesorService.getAllStudents();
@@ -31,6 +32,7 @@ public class ProfesorController {
         return "showAllStudents";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti/{indeks}")
     public String showStudent(@PathVariable("indeks") int indeks, Model model) {
         List<Ocena> oceni = profesorService.findOceni(indeks);
@@ -39,7 +41,7 @@ public class ProfesorController {
         return "showStudentOceni";
     }
 
-
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti/{indeks}/changeocena")
     public String chanegOcena(@PathVariable("indeks") int indeks, Model model) {
 
