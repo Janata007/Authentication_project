@@ -5,6 +5,7 @@ import com.example.security.Models.Student;
 import com.example.security.Service.Interface.IOceniService;
 import com.example.security.Service.Interface.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,7 +24,7 @@ public class StudentController {
     @Autowired
     private IStudentService studentService;
 
-
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/oceni")
     public String findOceni(Model model) {
         List<Ocena> oceni = oceniService.findAll();
@@ -32,6 +33,7 @@ public class StudentController {
         return "showOceni";
     }
 
+    @PreAuthorize("hasAuthority('ROLE_USER')")
     @GetMapping("/showStudent")
     public String findStudent(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

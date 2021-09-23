@@ -204,6 +204,14 @@
         color: white;
     }
 </style>
+    <script>
+        function handleCLick() {
+            var form = document.getElementById('search-theme-form')
+            var newUrl = '/profesor/studenti/' +  document.getElementById('indeks').value //form.myInput.value.toString()
+           //form.action = newUrl
+            location.href = newUrl
+        }
+    </script>
 </head>
 <body>
 <div class="pageContainer">
@@ -219,11 +227,11 @@
             </tr>
             <tr th:each="studenti : ${studenti}">
 
+                <input type="hidden" id="indeks" th:value='${studenti.indeks}'/>
                 <td id="indekso" th:text="${studenti.indeks}"></td>
                 <td th:text="${studenti.ime}"></td>
                 <td th:text="${studenti.prezime}"></td>
-                <td class="buttonCell"><form action=@{/profesor/{indeks}(indeks=@{studenti.indeks})/changeocena} method="get">
-                    <!--th:action="@{/profesor/changeOcena}" -->
+                <td class="buttonCell"><form action='javascript:' onsubmit="handleCLick()" id='search-theme-form' method="get">
                     <input class="tableButton" type="submit" value="View Grades"/>
                 </form>
                 </td>
@@ -233,8 +241,8 @@
         </table>
     </div>
 
-    <form th:action="@{/hello}" method="get">
-        <input class="homeButton" type="submit" value="Go to Home"/>
+    <form th:action="@{/logout}" method="post">
+        <input type="submit" class="homeButton" value="Sign Out"/>
     </form>
 </div>
 <script>

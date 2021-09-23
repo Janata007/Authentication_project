@@ -30,7 +30,6 @@ import javax.net.ssl.SSLContext;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -38,7 +37,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/static/**").permitAll()
-                .antMatchers("/", "/home","/prof").permitAll() //moze bilo koj tuka da pristapi
+                .antMatchers("/", "/home").permitAll() //moze bilo koj tuka da pristapi
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -47,11 +46,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .logout()
                 .permitAll();
+       /* http
+                .authorizeRequests()
+                .antMatchers("/student/**").hasRole("USER")
+                .antMatchers("/profesor/**").hasRole("ADMIN")
+                .and().x509().subjectPrincipalRegex("CN=(.*?),")
+                .userDetailsService(userDetailsService());*/
+
     }
 
     @Bean
     @Override
     public UserDetailsService userDetailsService() {
+
         UserDetails user1 =
                 User.withDefaultPasswordEncoder()
                         .username("181000")
@@ -62,13 +69,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 User.withDefaultPasswordEncoder()
                         .username("181112")
                         .password("password")
+                        .roles("USER")
+                        .build();
+        UserDetails user3 =
+                User.withDefaultPasswordEncoder()
+                        .username("Jana")
+                        .password("password")
                         .roles("ADMIN")
                         .build();
 
 
-        return new InMemoryUserDetailsManager(user1,user2);
+        return new InMemoryUserDetailsManager(user1,user2, user3);
+        /*return (UserDetailsService) username -> {
+            if (username.equals("Jana")) {
+                return new User(username, "",
+                        AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));
+            }else{
+                throw new UsernameNotFoundException("User:" + username + " not found");
+            }
+        };
+         */
     }
-
 /*
     @Bean
     public ServletWebServerFactory servletContainer() {

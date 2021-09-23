@@ -1,147 +1,147 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <title>Add ocena</title>
-  <style>
-      @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
-      @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Lato&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap');
 
-      {
-          margin: 0px;
-          padding: 0px;
-          box-sizing: border-box;
+        {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
 
-          font-family: "Lato", sans-serif;
-      }
-
-
-
-      body{
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          height: 100vh;
-          min-height: 100vh;
-      }
+            font-family: "Lato", sans-serif;
+        }
 
 
-      .formLabel{
-          font-size: 2.6rem;
-          font-weight: bold;
-          text-transform: capitalize;
-          position: relative;
-          color: darkslategray;
-      }
 
-      .formLabel::after{
-          content: '';
-          display: block;
-          position: absolute;
-          bottom: 0;
-          left: 0;
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
 
-          height: 3px;
-          width: 0%;
-          background-color: darkolivegreen;
-          transition: all 0.25s ease-in-out;
-
-          transform-origin: center;
-      }
-
-      .formInput{
-          font-size: 1.8rem;
-          padding: 5px;
-          width: 70%;
-      }
+            height: 100vh;
+            min-height: 100vh;
+        }
 
 
-      .formInput:focus ~ .formLabel::after{
-          width: 100%;
-      }
+        .formLabel{
+            font-size: 2.6rem;
+            font-weight: bold;
+            text-transform: capitalize;
+            position: relative;
+            color: darkslategray;
+        }
+
+        .formLabel::after{
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+
+            height: 3px;
+            width: 0%;
+            background-color: darkolivegreen;
+            transition: all 0.25s ease-in-out;
+
+            transform-origin: center;
+        }
+
+        .formInput{
+            font-size: 1.8rem;
+            padding: 5px;
+            width: 70%;
+        }
 
 
-      .formButtonContainer{
-          width: 100%;
-      }
-
-      .formButton{
-          width: 100%;
-          font-size: 1.6rem;
-          padding: 5px;
-
-          text-transform: capitalize;
-
-          background-color: transparent;
-          border: solid 2px #333533;
-          border-radius: 5px;
-          transition: all 0.25s ease-in-out;
-      }
-
-      .formButton:hover{
-          transform: scale(1.1);
-          cursor: pointer;
-          background-color: darkolivegreen;
-          color: white;
-          font-weight: bold;
-          letter-spacing: 2px;
-      }
-      pageContainer {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-
-          width: 40%;
-      }
-
-      form[name=form1] {
-          width: 100%
-      }
-
-      .changeOcenaTitle {
-          text-transform: uppercase;
-          font-size: 3rem;
-          margin-bottom: 30px;
-
-          width: 100%;
-          text-align: center;
-      }
-
-      .container {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          flex-direction: column;
-
-          margin-bottom: 30px;
-
-          width: 100%;
-      }
+        .formInput:focus ~ .formLabel::after{
+            width: 100%;
+        }
 
 
-      .form_group {
-          display: flex;
-          justify-content: space-between;
-          align-content: center;
+        .formButtonContainer{
+            width: 100%;
+        }
 
-          flex-direction: row-reverse;
+        .formButton{
+            width: 100%;
+            font-size: 1.6rem;
+            padding: 5px;
 
-          width: 100%;
-      }
+            text-transform: capitalize;
+
+            background-color: transparent;
+            border: solid 2px #333533;
+            border-radius: 5px;
+            transition: all 0.25s ease-in-out;
+        }
+
+        .formButton:hover{
+            transform: scale(1.1);
+            cursor: pointer;
+            background-color: darkolivegreen;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+        pageContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            width: 40%;
+        }
+
+        form[name=form1] {
+            width: 100%
+        }
+
+        .changeOcenaTitle {
+            text-transform: uppercase;
+            font-size: 3rem;
+            margin-bottom: 30px;
+
+            width: 100%;
+            text-align: center;
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+
+            margin-bottom: 30px;
+
+            width: 100%;
+        }
 
 
-      .form_group:nth-of-type(2) {
-          margin-bottom: 10px;
-          margin-top: 10px;
-      }
+        .form_group {
+            display: flex;
+            justify-content: space-between;
+            align-content: center;
 
-  </style>
+            flex-direction: row-reverse;
+
+            width: 100%;
+        }
+
+
+        .form_group:nth-of-type(2) {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+
+    </style>
 </head>
 <body>
 <div class="pageContainer">
     <h2 class="changeOcenaTitle">Add Grade</h2>
-    <form name = "form1" action="modified.php" method = "post" enctype = "multipart/form-data" >
+    <form name = "form1" action="" method = "post" enctype = "multipart/form-data" >
         <div class = "container">
             <div class = "form_group">
                 <input class="formInput" type = "text" name = "fname" value = "" required/>
@@ -155,11 +155,16 @@
                 <input class="formInput" type = "text" name = "lname" value = "" required/>
                 <label class="formLabel">Subject:</label>
             </div>
-
+            <div class="form_group">
+                <input class="formButton" type="submit" value="Add"  />
+            </div>
         </div>
+        <?php
+        echo "hello"
+        ?>
     </form>
     <form class="formButtonContainer" th:action="@{/profesor/studenti}" method="get">
-        <input class="formButton" type="submit" value="Add ocena"/>
+        <input class="formButton" type="submit" value="See All Students"/>
     </form>
 </div>
 </body>

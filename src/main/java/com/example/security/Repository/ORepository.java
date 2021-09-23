@@ -17,7 +17,6 @@ public class ORepository {
 
     public void insertOcena(Ocena ocena){
 
-
         Connection connection = null;
         try {
             connection = DriverManager.getConnection("jdbc:mysql://127.0.0.1:3306/ib_security", "root", "root");
@@ -42,11 +41,9 @@ public class ORepository {
             rs.insertRow();
             rs.moveToCurrentRow();
 
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
-
 
     }
 

@@ -38,13 +38,14 @@ public class ProfesorController {
         List<Ocena> oceni = profesorService.findOceni(indeks);
         //System.out.println(oceni);
         model.addAttribute("oceni", oceni);
+        model.addAttribute("indeks", indeks);
         return "showStudentOceni";
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti/{indeks}/changeocena")
     public String chanegOcena(@PathVariable("indeks") int indeks, Model model) {
-
+        model.addAttribute("indeks", indeks);
         return "changeStudentOcena";
     }
 

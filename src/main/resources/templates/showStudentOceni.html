@@ -204,11 +204,21 @@
             color: white;
         }
     </style>
+    <script>
+        function handleCLick() {
+            var newUrl = '/profesor/studenti/' + document.getElementById('indeks').value+ '/changeocena'
+            location.href = newUrl
+        }
+    </script>
+
 </head>
 <body>
+<input type="hidden" id="indeks" th:value='${indeks}'/>
+
 <div class="pageContainer">
     <h2 class="showAllStudentsTitle">Student Grade List</h2>
     <div class="tableContainer"  th:if="${not #lists.isEmpty(oceni)}">
+        <h4 id="indekso" th:text="${indeks}"></h4>
         <table class="studentTable">
             <tr>
                 <th>Id</th>
@@ -222,17 +232,16 @@
                 <td th:text="${oceni.ocenka}"></td>
                 <td th:text="${oceni.predmet}"></td>
                 <td class="buttonCell">
-                    <form th:action="@{/profesor/changeOcena}" method="get">
-                        <input class="tableButton" type="submit" value="Change Grade"/>
-                    </form></td>
 
             </tr>
-
         </table>
     </div>
-    <form th:action="@{/hello}" method="get">
-        <input class="homeButton" type="submit" value="Go to Home"/>
+    <form th:action="@{/profesor/studenti}" method="get"> <!--@{/profesor/studenti}-->
+        <input class="homeButton" type="submit" value="Student List"/>
     </form>
+    <form action='javascript:' onsubmit="handleCLick()" method="get">
+        <input class="homeButton" type="submit" value="Add Grade"/>
+    </form></td>
 </div>
 </body>
 </html>
