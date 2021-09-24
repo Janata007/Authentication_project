@@ -32,6 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+      /*
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -46,12 +47,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .and()
                 .logout()
                 .permitAll();
-       /* http
+
+       */
+        http
                 .authorizeRequests()
                 .antMatchers("/student/**").hasRole("USER")
                 .antMatchers("/profesor/**").hasRole("ADMIN")
                 .and().x509().subjectPrincipalRegex("CN=(.*?),")
-                .userDetailsService(userDetailsService());*/
+                .userDetailsService(userDetailsService());
 
     }
 
@@ -79,8 +82,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         .build();
 
 
-        return new InMemoryUserDetailsManager(user1,user2, user3);
-        /*return (UserDetailsService) username -> {
+       // return new InMemoryUserDetailsManager(user1,user2, user3);
+        return (UserDetailsService) username -> {
             if (username.equals("Jana")) {
                 return new User(username, "",
                         AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));
@@ -88,7 +91,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 throw new UsernameNotFoundException("User:" + username + " not found");
             }
         };
-         */
+
     }
 /*
     @Bean

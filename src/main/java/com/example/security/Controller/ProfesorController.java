@@ -13,6 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import java.security.cert.Certificate;
+import java.security.cert.X509Certificate;
 import java.util.List;
 
 @Controller
@@ -25,11 +28,13 @@ public class ProfesorController {
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti")
-    public String findStudent(Model model) {
-        List<Student> studenti = profesorService.getAllStudents();
-        System.out.println(studenti);
-        model.addAttribute("studenti", studenti);
-        return "showAllStudents";
+    public String findStudent(Model model, HttpServletRequest request) {
+        X509Certificate[] certs = (X509Certificate[]) request.getAttribute("javax.servlet.request.X509Certificate");
+            List<Student> studenti = profesorService.getAllStudents();
+            System.out.println(studenti);
+            model.addAttribute("studenti", studenti);
+            return "showAllStudents";
+
     }
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
