@@ -32,23 +32,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-      /*
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/**").permitAll()
                 .antMatchers("/static/**").permitAll()
-                .antMatchers("/", "/home").permitAll() //moze bilo koj tuka da pristapi
+                .antMatchers("/", "/home").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login")
                 .permitAll()
                 .and()
+               .x509()
+               .subjectPrincipalRegex("CN=(.*?)(?:,|$)")
+               .userDetailsService(this.userDetailsService());
+
+        /*
+
+                .and()
                 .logout()
                 .permitAll();
 
-       */
         http
                 .authorizeRequests()
                 .antMatchers("/css/**").permitAll()
@@ -58,6 +63,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers("/profesor/**").hasRole("ADMIN")
                 .and().x509().subjectPrincipalRegex("CN=(.*?),")
                 .userDetailsService(userDetailsService());
+        */
 
     }
 
@@ -84,15 +90,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         .roles("ADMIN")
                         .build();
 
-       // return new InMemoryUserDetailsManager(user1,user2, user3);
-        return username -> {
+       return new InMemoryUserDetailsManager(user1,user2, user3);
+
+       /* return username -> {
             if (username.equals("Jana")) {
                 return new User(username, "",
                         AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));
             }else{
                 throw new UsernameNotFoundException("User:" + username + " not found");
             }
-        };
+        };*/
+
+
 
     }
 
