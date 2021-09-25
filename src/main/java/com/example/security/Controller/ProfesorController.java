@@ -6,15 +6,13 @@ import com.example.security.Models.Student;
 import com.example.security.Service.Interface.IOceniService;
 import com.example.security.Service.Interface.IProfesorService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.security.cert.Certificate;
 import java.security.cert.X509Certificate;
 import java.util.List;
 
@@ -29,11 +27,10 @@ public class ProfesorController {
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti")
     public String findStudent(Model model, HttpServletRequest request) {
-        X509Certificate[] certs = (X509Certificate[]) request.getAttribute("javax.servlet.request.X509Certificate");
-            List<Student> studenti = profesorService.getAllStudents();
-            System.out.println(studenti);
-            model.addAttribute("studenti", studenti);
-            return "showAllStudents";
+        List<Student> studenti = profesorService.getAllStudents();
+        System.out.println(studenti);
+        model.addAttribute("studenti", studenti);
+        return "showAllStudents";
 
     }
 
@@ -41,7 +38,6 @@ public class ProfesorController {
     @GetMapping("/studenti/{indeks}")
     public String showStudent(@PathVariable("indeks") int indeks, Model model) {
         List<Ocena> oceni = profesorService.findOceni(indeks);
-        //System.out.println(oceni);
         model.addAttribute("oceni", oceni);
         model.addAttribute("indeks", indeks);
         return "showStudentOceni";
@@ -54,5 +50,11 @@ public class ProfesorController {
         return "changeStudentOcena";
     }
 
+    @PostMapping(path="/studenti/{indeks}/changeocena", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public String insertOcenka(@PathVariable("inedeks") int indeks, Model model, @RequestBody Ocena newOcena){
+        oceniService.insertOcena(newOcena);
+        return "showStudentOceni";
+
+    }
 
 }

@@ -12,13 +12,14 @@ public class StudentService implements IStudentService {
     @Autowired
     private SRepository studentRepository;
 
-    public StudentService(SRepository sRepository){ this.studentRepository = sRepository;}
-
+    public StudentService(SRepository sRepository) {
+        this.studentRepository = sRepository;
+    }
 
 
     @Override
     public Student findStudent(int indeks) {
-        Student s = studentRepository.findStudent(indeks);
+        Student s = SRepository.findStudent(indeks);
         return s;
     }
 

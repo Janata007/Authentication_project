@@ -6,18 +6,14 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
-//POJO class for Student
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="name")
+@Table(name = "name")
 public class Student {
 
-  /*  @Enumerated(value = EnumType.STRING)
-    private Role role;*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;

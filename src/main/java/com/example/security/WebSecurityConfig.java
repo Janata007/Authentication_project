@@ -51,6 +51,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
        */
         http
                 .authorizeRequests()
+                .antMatchers("/css/**").permitAll()
+                .antMatchers("/static/**").permitAll()
+                .antMatchers("/", "/home").permitAll()
                 .antMatchers("/student/**").hasRole("USER")
                 .antMatchers("/profesor/**").hasRole("ADMIN")
                 .and().x509().subjectPrincipalRegex("CN=(.*?),")
@@ -81,9 +84,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         .roles("ADMIN")
                         .build();
 
-
        // return new InMemoryUserDetailsManager(user1,user2, user3);
-        return (UserDetailsService) username -> {
+        return username -> {
             if (username.equals("Jana")) {
                 return new User(username, "",
                         AuthorityUtils.commaSeparatedStringToAuthorityList("ROLE_ADMIN"));
@@ -93,32 +95,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
         };
 
     }
-/*
-    @Bean
-    public ServletWebServerFactory servletContainer() {
-        TomcatServletWebServerFactory tomcat = new TomcatServletWebServerFactory() {
-            @Override
-            protected void postProcessContext(Context context) {
-                var securityConstraint = new SecurityConstraint();
-                securityConstraint.setUserConstraint("CONFIDENTIAL");
-                var collection = new SecurityCollection();
-                collection.addPattern("/*");
-                securityConstraint.addCollection(collection);
-                context.addConstraint(securityConstraint);
-            }
-        };
-        tomcat.addAdditionalTomcatConnectors(getHttpConnector());
-        return tomcat;
-    }
-
-    private Connector getHttpConnector() {
-        var connector = new Connector(TomcatServletWebServerFactory.DEFAULT_PROTOCOL);
-        connector.setScheme("http");
-        connector.setPort(8080);
-        connector.setSecure(false);
-        connector.setRedirectPort(8443);
-        return connector;
-    }
-*/
 
 }

@@ -26,8 +26,9 @@ public class ProfesorService implements IProfesorService {
     public Student getStudent(int indeks) {
         return SRepository.findStudent(indeks);
     }
+
     @Override
-    public List<Student> getAllStudents(){
+    public List<Student> getAllStudents() {
 
         return sRepository.findAll();
 

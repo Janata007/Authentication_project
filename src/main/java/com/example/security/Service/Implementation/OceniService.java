@@ -12,7 +12,6 @@ import java.util.List;
 public class OceniService implements IOceniService {
 
     @Autowired
-    //private OceniRepository oceniRepository;
     private ORepository oceniRepository;
 
     public OceniService(ORepository oceniRepository1) {
@@ -22,7 +21,7 @@ public class OceniService implements IOceniService {
     @Override
     public List<Ocena> findAll() {
 
-        return (List<Ocena>) oceniRepository.findAll();
+        return oceniRepository.findAll();
 
     }
 
