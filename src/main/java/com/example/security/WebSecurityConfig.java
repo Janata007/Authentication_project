@@ -73,7 +73,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
         UserDetails user1 =
                 User.withDefaultPasswordEncoder()
-                        .username("181000")
+                        .username("182031")
                         .password("password")
                         .roles("USER")
                         .build();
@@ -85,12 +85,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                         .build();
         UserDetails user3 =
                 User.withDefaultPasswordEncoder()
+                        .username("181110")
+                        .password("password")
+                        .roles("USER")
+                        .build();
+        UserDetails user4 =
+                User.withDefaultPasswordEncoder()
                         .username("Jana")
                         .password("password")
                         .roles("ADMIN")
                         .build();
 
-       return new InMemoryUserDetailsManager(user1,user2, user3);
+       return new InMemoryUserDetailsManager(user1,user2, user3, user4);
 
        /* return username -> {
             if (username.equals("Jana")) {
