@@ -32,7 +32,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http.csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
                 .antMatchers("/css/**").permitAll()
@@ -100,7 +100,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
                 throw new UsernameNotFoundException("User:" + username + " not found");
             }
         };*/
-
 
 
     }

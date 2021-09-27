@@ -134,26 +134,36 @@
         .form_group:nth-of-type(2) {
             margin-bottom: 10px;
             margin-top: 10px;
-        }
+        }S
 
     </style>
+    <script>
+        function handleCLick() {
+            var newUrl = '/profesor/studenti/' +  document.getElementById('indeks').value + '/changeocena'//form.myInput.value.toString()
+            location.href = newUrl
+        }
+    </script>
 </head>
 <body>
 <div class="pageContainer">
     <h2 class="changeOcenaTitle">Add Grade</h2>
-    <form name = "form1" action="" method = "post" enctype = "multipart/form-data" >
+    <h3 th:text="${studentId}"></h3>
+    <form name = "form1" action='/profesor/processform' method = "post" >
         <div class = "container">
             <div class = "form_group">
-                <input class="formInput" type = "text" name = "fname" value = "" required/>
+                <input class="formInput" type = "text" name = "gradeId" value = "" required/>
                 <label class="formLabel">Grade id:</label>
             </div>
             <div class = "form_group">
-                <input class="formInput" type = "text" name = "mname" value = "" required />
+                <input class="formInput" type = "text" name = "grade" value = "" required />
                 <label class="formLabel">Grade:</label>
             </div>
             <div class = "form_group">
-                <input class="formInput" type = "text" name = "lname" value = "" required/>
+                <input class="formInput" type = "text" name = "subject" value ="" required/>
                 <label class="formLabel">Subject:</label>
+            </div>
+            <div class = "form_group">
+                <input class="formInput" type = "hidden" name = "studentId" th:value ="${studentId}" required/>
             </div>
             <div class="form_group">
                 <input class="formButton" type="submit" value="Add"  />

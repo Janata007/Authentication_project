@@ -5,6 +5,7 @@ import com.example.security.Models.Ocena;
 import com.example.security.Models.Student;
 import com.example.security.Service.Interface.IOceniService;
 import com.example.security.Service.Interface.IProfesorService;
+import com.example.security.Service.Interface.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -23,6 +24,8 @@ public class ProfesorController {
     private IProfesorService profesorService;
     @Autowired
     private IOceniService oceniService;
+    @Autowired
+    private IStudentService studentService;
 
     @PreAuthorize("hasAuthority('ROLE_ADMIN')")
     @GetMapping("/studenti")
@@ -47,11 +50,25 @@ public class ProfesorController {
     @GetMapping("/studenti/{indeks}/changeocena")
     public String chanegOcena(@PathVariable("indeks") int indeks, Model model) {
         model.addAttribute("indeks", indeks);
+        int studentId = studentService.findStudent(indeks).getId();
+        model.addAttribute("studentId", studentId);
         return "changeStudentOcena";
     }
 
-    @PostMapping(path="/studenti/{indeks}/changeocena", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public String insertOcenka(@PathVariable("inedeks") int indeks, Model model, @RequestBody Ocena newOcena){
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')")
+    @PostMapping(path="/processform")
+    public String insertOcenka( HttpServletRequest request){
+        String gradeId = request.getParameter("gradeId"); //long
+        String grade = request.getParameter("grade"); //int
+        String subject = request.getParameter("subject");
+        String studentId = request.getParameter("studentId"); //int
+        int ocena = Integer.parseInt(grade);
+        int idstudent = Integer.parseInt(studentId);
+        Long ocenaId = new Long(Integer.parseInt(gradeId));
+
+        Ocena newOcena = new Ocena(ocenaId, ocena, subject, idstudent);
+        System.out.println(newOcena.getId());
+
         oceniService.insertOcena(newOcena);
         return "showStudentOceni";
 
