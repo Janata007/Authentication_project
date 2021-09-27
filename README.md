@@ -1,4 +1,4 @@
-R# Grade System w/Security
+# Grade System w/Security
 
 Spring Boot project using https and certification.
 
