@@ -166,6 +166,8 @@
 
 
     </style>
+
+
 </head>
 <body>
 <div class="pageContainer">
@@ -185,12 +187,89 @@
             <input class="formInput" type="password" name="password"/>
             <label class="formLabel">Password:</label>
         </div>
-        <form th:action="@{/hello}" method="get">
+
         <div class="form_group">
-            <input class="signInButton" type="submit" value="Sign In"/>
+            <input class="formInput" type="radio" name="radiobutton" onclick="hideCertificate()"/>
+            <label class="formLabel">Student</label>
+            <input class="formInput" type="radio" name="radiobutton" onclick="showCertificate()"/>
+            <label class="formLabel">Professor</label>
+
         </div>
+        <div class="form_group" id="cert" style="visibility: hidden">
+            <input id="upload" class="formInput" type="file" name="Certificate"  onchange="verifyCertificate()"/>
+            <label class="formLabel">Upload Client Certificate:</label>
+        </div>
+        <div class="form_group">
+
+            <label id="valid" style="color: green; visibility: hidden;">Certificate is valid!</label>
+            <label id="notvalid" style="color: red; visibility: hidden;">Certificate is invalid!</label>
+
+        </div>
+        <form th:action="@{/hello}" method="get">
+            <div class="form_group">
+                <input class="signInButton" type="submit" id="signin" disabled="disabled" value="Sign In"/>
+            </div>
         </form>
     </form>
 </div>
 </body>
+<script>
+
+    function showCertificate(){
+
+        var x = document.getElementById("cert");
+        x.style.visibility = "visible";
+        document.getElementById("signin").disabled=true;
+
+
+
+    }
+
+    function hideCertificate(){
+
+        var x = document.getElementById("cert");
+        x.style.visibility = "hidden";
+        document.getElementById("signin").disabled=false;
+
+
+
+    }
+
+    function verifyCertificate() {
+
+        var certnames= ["client-app.crt","nesto"];
+        var fullPath = document.getElementById('upload').value;
+        var filename="";
+        if (fullPath) {
+            var startIndex = (fullPath.indexOf('\\') >= 0 ? fullPath.lastIndexOf('\\') : fullPath.lastIndexOf('/'));
+            filename = fullPath.substring(startIndex);
+            if (filename.indexOf('\\') === 0 || filename.indexOf('/') === 0) {
+                filename = filename.substring(1);
+            }
+
+        }
+
+        var valid = document.getElementById("valid");
+        var notvalid = document.getElementById("notvalid");
+        var arr=Array.from(certnames);
+        var answer = arr.indexOf(filename);
+
+
+        if(answer==-1) {
+
+            notvalid.style.visibility = "visible";
+            valid.style.visibility = "hidden";
+
+        }
+        else {
+
+            valid.style.visibility="visible";
+            notvalid.style.visibility="hidden";
+            document.getElementById("signin").disabled=false;
+        }
+    }
+
+
+</script>
+
 </html>
